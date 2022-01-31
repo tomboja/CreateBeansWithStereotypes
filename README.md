@@ -56,8 +56,8 @@ The steps we need to follow in the process are as follows:
     }
    ```
    
-   1. Check that the bean is added to the spring context like following
-   2. 
+3. Check that the bean is added to the spring context like following
+ 
        ```
        public class Main {
           public static void main(String[] args) {
