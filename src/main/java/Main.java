@@ -14,7 +14,7 @@ public class Main {
                 new AnnotationConfigApplicationContext(Config.class);
 
         Parrot parrot = context.getBean(Parrot.class);
-        parrot.setName("Jamila");
+        //parrot.setName("Another name");
 
         System.out.println("parrot = " + parrot);
     }

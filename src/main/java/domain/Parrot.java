@@ -2,6 +2,8 @@ package domain;
 
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+
 /**
  * @ProjectName: CreateBeansWithStereotypes
  * @Author: tdessalegn
@@ -16,7 +18,12 @@ public class Parrot {
     private String name;
 
     public Parrot() {
-        this.name = "Koko"; // default Parrot name
+        this.name = "no-name"; // default Parrot name
+    }
+
+    @PostConstruct
+    public void assignName() {
+        this.name = "Jamila";
     }
 
     public String getName() {

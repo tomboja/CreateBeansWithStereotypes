@@ -96,7 +96,7 @@ For this to work properly, the following dependency need to be added for JDK ver
    <dependency>
       <groupId>javax.annotation</groupId>
       <artifactId>javax.annotation-api</artifactId>
-      <version>1.3.2</version> // Version maybe different
+      <version>1.2.0</version> // Version maybe different
    </dependency>
 ```
 
