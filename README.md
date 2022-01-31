@@ -70,3 +70,69 @@ The steps we need to follow in the process are as follows:
          }
        }
    ```
+
+Using @Bean, we were able to define a name for each of the Parrot instances we added to the 
+Spring context, but using @Component, we didn't get a chance to do something after Spring 
+called the constructor of the Parrot class. We can do so, by using ***@PostConstruct*** annotation
+in the component class to instruct spring execute this code block after bean creation. Thus in the
+component class, we can add as follows:
+
+```
+   @Component
+   public class Parrot {
+      private String name;
+       
+      @PostConstruct
+      public void init() {
+          this.name = "Tadaa";
+      }
+  
+   }
+```
+
+For this to work properly, the following dependency need to be added for JDK version 11 and above.
+
+```
+   <dependency>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+      <version>1.3.2</version> // Version maybe different
+   </dependency>
+```
+
+NOTE: _You don’t need to add this dependency if you use a Java version smaller than Java 11. 
+Before Java 11, the Java EE dependencies were part of the JDK. With Java 11, 
+the JDK was cleaned of the APIs not related to SE, including the Java EE dependencies._
+
+## Comparing ***@Bean*** vs ***@Component*** ways adding beans to spring context
+
+### <u> 1. Using the @Bean annotation </u>                                                       
+
+1. You have full control over the instance creation you add to the Spring context. 
+   It is your responsibility to create and configure the instance in the body of the method 
+   annotated with @Bean. Spring only takes that instance and adds it to the context as-is.
+
+2. You can use this method to add more instances of the same type to the Spring context. 
+
+3. You can use the @Bean annotation to add to the Spring context any object instance. 
+   The class that defines the instance does not need to be defined in your app. 
+   Remember, earlier we added a String and an Integer to the Spring context.
+
+4. You need to write a separate method for each bean you create, 
+   which adds boilerplate code to your app. For this reason, 
+   we prefer using @Bean as a second option to stereotype annotations in our projects.
+
+### <u> 2. Using stereotype annotations </u>  
+
+1. You only have control over the instance after the framework creates it.
+
+2. This way, you can only add one instance of the class to the context.
+
+3. You can use stereotype annotations only to create beans of the classes 
+  your application owns. For example, you could not add a bean of type 
+  String or Integer with the @Bean annotation 
+  because you don’t own these classes to change them by adding a stereotype annotation.
+
+4. Using stereotype annotations to add beans to the Spring context does not add 
+  boilerplate code to your app. You’ll prefer this approach in general for the classes 
+  that belong to your app.
